@@ -1,4 +1,4 @@
 # 강의 목록
-## 형상관리 도구 사용법 - git 
-	- 강의자료
+
+- <a href='https://github.com/yonggyo1125/lectureETC/tree/master/1.%20%ED%98%95%EC%83%81%EA%B4%80%EB%A6%AC%20%ED%88%B4(git)'>형상관리 툴(git)</a>
 	
