@@ -209,11 +209,65 @@ Actual   :5
 
 ### @BeforeEach 애노테이션과 @AfterEach 애노테이션 
 - JUnit은 각 테스트 메서드마다 다음 순서대로 코드를 실행한다.<br>
-	1\. 테스트 메서드를 포함한 객체 생성 
-	2\. (존재하면) @BeforeEach 애노테이션이 붙은 메서드 실행
-	3\. @Test 애노테이션이 붙은 메서드 실행
-	4\. (존재하면) @AfterEach 애노테이션이 붙은 메서드 실행
+	1\. 테스트 메서드를 포함한 객체 생성<br>
+	2\. (존재하면) @BeforeEach 애노테이션이 붙은 메서드 실행<br>
+	3\. @Test 애노테이션이 붙은 메서드 실행<br>
+	4\. (존재하면) @AfterEach 애노테이션이 붙은 메서드 실행<br>
 	
 ```java
+package tdd01;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+public class LifecycleTest   {
+    public LifecycleTest() {
+        System.out.println("new Lifecycle Test");
+    }
+
+    @BeforeEach
+    void setUp() {
+        System.out.println("setUp");
+    }
+
+    @Test
+    void a() {
+        System.out.println("A");
+    }
+
+    @Test
+    void b() {
+        System.out.println("B");
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.out.println("tearDown");
+    }
+}
+```
+
+- 위 테스트 클래스를 실행하면 콘솔에 다음 결과가 출력된다.
 
 ```
+new Lifecycle Test
+setUp
+A
+tearDown
+new Lifecycle Test
+setUp
+B
+tearDown
+```
+
+- @Test 메서드를 실행할 때마다 객체를 새로 생성하고 테스트 메서드를 실행하기 전과 후에 @BeforeEach 애노테이션과 @AfterEach 애노테이션을 붙인 메서드를 실행한다는 것을 알 수 있다.
+- @BeforeEach 애노테이션은 테스트를 실행하는데 필요한 준비 작업을 할 때 사용한다. @BeforeEach 애노테이션을 이용해서 테스트에서 사용할 임시 파일을 생성한다거나 테스트 메서드에서 사용할 객체를 생성한다.
+- @AfterEach 애노테이션은 테스트를 실행한 후에 정리할 것이 있을 때 사용한다. 테스트에서 사용한 임시 파일을 삭제해야 할 때 @AfterEach 애노테이션을 사용하면 된다.
+- @BeforeEach 애노테이션과 @AfterEach 애노테이션을 붙인 메서드는 @Test 애노테이션과 마찬가지로 private이면 안 된다.
+
+## @BeforeAll 애노테이션과 @AfterAll 애노테이션
+- 한 클래스의 모든 테스트가 실행되기 전에 특정 작업을 수행해야 한다면 @BeforeAll 애노테이션을 사용한다. 
+- @BeforeAll 애노테이션은 정적 메서드에 붙이는데 이 메서드는 클래스의 모든 테스트 메서드를 실행하기 전에 한 번 실행된다.
+- @AfterAll 애노테이션은 반대로 클래스의 모든 테스트 메서드를 실행한 뒤에 실행된다. 이 메서드 역시 정적 메서드에 적용한다.
+
