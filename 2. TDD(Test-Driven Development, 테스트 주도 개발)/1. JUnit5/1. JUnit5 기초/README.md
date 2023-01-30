@@ -271,3 +271,67 @@ tearDown
 - @BeforeAll 애노테이션은 정적 메서드에 붙이는데 이 메서드는 클래스의 모든 테스트 메서드를 실행하기 전에 한 번 실행된다.
 - @AfterAll 애노테이션은 반대로 클래스의 모든 테스트 메서드를 실행한 뒤에 실행된다. 이 메서드 역시 정적 메서드에 적용한다.
 
+## 테서트 메서드간 실행 순서 의존과 필드 공유하지 않기 
+
+```java
+public class BadTest {
+	private FileOperator op = new FileOperator();
+	private static File file; // 두 테스트가 데이터를 공유할 목적으로 필드 사용 
+	
+	@Test
+	void fileCreationTest() {
+		File createdFile = op.createFile();
+		assertTrue(createdFile.length() > 0);
+		this.file = createdFile;
+	}
+	
+	@Test
+	void readFileTest() {
+		long data = op.readData(file);
+		assertTrue(data > 0);
+	}
+}
+```
+
+-  이 코드는 file 필드를 이용해서 FileCreationTest() 메서드에서 생성한 File을 보관하고 file 필드를 readFileTest() 메서드에서 사용한다. 테스트 메서드를 실행할 때마다 객체를 새로 생성하므로 file을 정적 필드로 정의했다. 이 테스트는 fileCreationTest() 메서드가 readFileTest() 메서드보다 먼저 실행된다는 것을 가정한다.
+
+- 실제로 원하는 순서대로 테스트 메서드가 실행될 수도 있다. 하지만 테스트 메서드가 특정 순서대로 실행된다는 가정하에 테스트 메서드를 작성하면 안된다. JUnit이 테스트 순서를 결정하긴 하지만 그 순서는 버전에 따라 달라질 수 있다. 순서가 달라지면 테스트도 실패한다. 예를 들어 readFileTest() 메서드가 먼저 실행되면 file 필드가 null이므로 테스트에 실패하게 된다.
+
+- 각 테스트 메서드는 서로 독립적으로 동작해야 한다. 한 테스트 메서드의 결과에 따라 다른 테스트 메서드의 실행 결과가 달라지면 안 된다. 그런 의미에서 테스트 메서드가 서로 필드를 공유한다거나 실행 순서를 가정하고 테스트를 작성하지 말아야 한다.
+
+|JUnit은 테스트 메서드의 실행 순서를 지정하는 방법을 제공하고 있다. 하지만 각 테스트 메서드는 독립적으로 동작해야 한다. 테스트 메서드 간에 의존에 생기면 이는 테스트 코드의 유지보수를 어렵게 만든다. 테스트 코드 역시 코드이므로 유지보수가 중요하다. 테스트 코드를 작성할 때에는 이 점에서 유념해야 한다.
+
+## 추가 애노테이션: @DisplayName, @Disabled
+- 자바는 메서드 이름에 공백이나 특수 문자를 사용할 수 없기 때문에 메서드 이름만으로 테스트 내용을 설명하기가 부족할 수 있다. 이럴 때는 @DisplayName 애노테이션을 사용해서 테스트에 이름을 붙일 수 있다. 
+
+```java
+package tdd01;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+@DisplayName("@DisplayName 테스트")
+public class DisplayNameTest {
+    @DisplayName("값 같은지 비교")
+    @Test
+    void assertEqualsMethod() {
+        // 생략
+    }
+
+    @Test
+    void failMethod() {
+        // 생략
+    }
+
+    @DisplayName("익셉션 발생 여부 테스트")
+    @Test
+    void assertThrowsTest() {
+        // 생략
+    }
+
+    @Test
+    void assertAllTest() {
+        // 생략
+    }
+}
+```
