@@ -335,3 +335,40 @@ public class DisplayNameTest {
     }
 }
 ```
+
+- @DisplayName 애노테이션을 사용한 테스트 결과는 다음과 같습니다. 클래스나 메서드 이름이 아닌 @DisplayName 애노테이션에 지정한 값을 사용해서 표시합니다.
+
+![추가애노테이션](https://raw.githubusercontent.com/yonggyo1125/lectureETC/master/2.%20TDD(Test-Driven%20Development%2C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A3%BC%EB%8F%84%20%EA%B0%9C%EB%B0%9C)/1.%20JUnit5/1.%20JUnit5%20%EA%B8%B0%EC%B4%88/images/image1.png)
+
+- 특정 테스트를 실행하지 않고 싶을 때는 @Disabled 애노테이션을 사용한다. JUnit은 @Disabled 애노테이션이 붙은 클래스나 메서드는 테스트 실행 대상에서 제외한다. 아직 테스트 코드가 완성되지 않았거나 잠시 동안 테스트를 실행하지 말아야 할 때 이 애노테이션을 사용한다.
+
+```java
+import org.junit.juniper.api.Disabled;
+
+public class AssertionsTest {
+	@Disabled
+	@Test
+	void failMethod() {
+		try {
+			AuthService authService = new AuthService();
+			authService.authenticate(null, null);
+			fail();
+		} catch (IllegalArgumentException e) {
+		}
+	}
+	... 생략
+}
+```
+
+## 모든 테스트 실행하기
+- 개발하는 과정에서 특정 테스트 클래스나 메서드만 실행하지만, 코드를 원격 리포지토리에 푸시하거나 코드를 빌드해서 운영 환경에 배포하기 전에는 모든 테스트를 실행해서 깨지는 테스트가 없는지 확인한다. 이때 실패하는 테스트가 존재하면 무언가 잘못됐다는 것이므로 코드 푸시나 배포를 멈추고 문제 원인을 찾아 제거해야 한다.
+
+- 모든 테스트를 실행하는 방법은 메이븐과 그래이들의 경우 각각 다음 명령어를 사용하면 된다.
+
+```
+mvn test (래퍼를 사용하는 경우 mvnw test)
+gradle test (래퍼를 사용하는 경우 gradlew test)
+```
+
+- 메이븐이 제공하는 라이프사이클에 따르면 package 단계를 실행할 때 test 단계를 앞서 실행하므로 mvn package 명령어를 실행해도 테스트를 실행한다. 
+- 그레이들 역시 build 태스크를 실행하면 테스트를 실행하므로 gradle build 명령어를 실행하면 테스트를 실행한다.
