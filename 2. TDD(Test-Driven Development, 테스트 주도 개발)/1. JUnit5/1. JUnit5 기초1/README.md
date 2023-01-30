@@ -1,4 +1,4 @@
-# JUnit 5의 기초
+# JUnit 5 기초1
 
 ## JUnit 5 모듈 구성
 - JUnit 5는 크게 세 개의 요소로 구성되어 있다.
@@ -8,7 +8,7 @@
 	
 - JUnit 5의 모듈 구성
 
-![JUnit5의 모듈 구성](https://raw.githubusercontent.com/yonggyo1125/lectureETC/master/2.%20TDD(Test-Driven%20Development%2C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A3%BC%EB%8F%84%20%EA%B0%9C%EB%B0%9C)/1.%20JUnit5/1.%20JUnit5%20%EA%B8%B0%EC%B4%88/images/image1.png)
+![JUnit5의 모듈 구성](https://raw.githubusercontent.com/yonggyo1125/lectureETC/master/2.%20TDD(Test-Driven%20Development%2C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A3%BC%EB%8F%84%20%EA%B0%9C%EB%B0%9C)/1.%20JUnit5/1.%20JUnit5%20%EA%B8%B0%EC%B4%881/images/image1.png)
 
 
 - JUnit5는 테스트를 위한 API로 주피터 API를 제공한다. 
@@ -338,7 +338,7 @@ public class DisplayNameTest {
 
 - @DisplayName 애노테이션을 사용한 테스트 결과는 다음과 같습니다. 클래스나 메서드 이름이 아닌 @DisplayName 애노테이션에 지정한 값을 사용해서 표시합니다.
 
-![추가애노테이션](https://raw.githubusercontent.com/yonggyo1125/lectureETC/master/2.%20TDD(Test-Driven%20Development%2C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A3%BC%EB%8F%84%20%EA%B0%9C%EB%B0%9C)/1.%20JUnit5/1.%20JUnit5%20%EA%B8%B0%EC%B4%88/images/image1.png)
+![추가애노테이션](https://raw.githubusercontent.com/yonggyo1125/lectureETC/master/2.%20TDD(Test-Driven%20Development%2C%20%ED%85%8C%EC%8A%A4%ED%8A%B8%20%EC%A3%BC%EB%8F%84%20%EA%B0%9C%EB%B0%9C)/1.%20JUnit5/1.%20JUnit5%20%EA%B8%B0%EC%B4%881/images/image2.png)
 
 - 특정 테스트를 실행하지 않고 싶을 때는 @Disabled 애노테이션을 사용한다. JUnit은 @Disabled 애노테이션이 붙은 클래스나 메서드는 테스트 실행 대상에서 제외한다. 아직 테스트 코드가 완성되지 않았거나 잠시 동안 테스트를 실행하지 말아야 할 때 이 애노테이션을 사용한다.
 
