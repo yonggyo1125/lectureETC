@@ -96,3 +96,99 @@ String num = genMock.generate(GameLevel.EASY);
 ```
 
 - 지정한 값을 리턴하는 대신에 익셉션을 발생하게 설정할 수 도 있다. 이때는 willReturn() 대신 willThrow() 메서드를 사용하면 된다.
+```java 
+@Test
+void mockThrowTest() {
+	GameNumGen genMock = mock(GameNumGen.class);
+	given(genMock.generate(null)).willThrow(IllegalArgumentException.class);
+	
+	assertThrows(
+		IllegalArgumentException.class,
+		() -> genMock.generate(null));
+}
+```
+
+- 타입 대신에 익셉션 객체를 인자로 받는 willThrow() 메서드를 사용해도 된다.
+
+```java
+given(genMock.generate(null)).willThrow(new IllegalArgumentException());
+```
+
+- 리턴 타입이 void인 메서드에 대해 익셉션을 발생하려면 BDDMockito.willThrow() 메서드로 시작한다.
+
+```java
+package tdd01;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.BDDMockito.willThrow;
+import static org.mockito.Mockito.mock;
+
+public class VoidMethodStubTest {
+    @Test
+    void voidMethodWillThrowTesst() {
+        List<String> mockList = mock(List.class);
+        willThrow(UnsupportedOperationException.class)
+                .given(mockList)
+                .clear();
+
+        assertThrows(
+                UnsupportedOperationException.class,
+                () -> mockList.clear()
+        );
+    }
+}
+```
+- BDDMockito.willThrow() 메서드는 발생할 익셉션 타입이나 익셉션 객체를 인자로 받는다. 이어서 given() 메서드는 모의 객체를 전달받는다. 모의 객체의 메서드 실행이 아닌 모의 객체임에 유의한다. 이때 given() 메서드는 인자로 전달받은 모의 객체 자신을 리턴하는데 이때 익셉션을 발생할 메서드를 호출한다. 
+
+```java
+willThrow(UnsupportedOperationException.class)
+                .given(mockList)
+                .clear();
+```
+- 실제로 모의 객체의 메서드를 호출하지 않으며 단지 익셉션을 발생할 모의 객체를 설정하는 것뿐이다.
+
+## 인자 매칭 처리
+
+```java
+given(genMock.generate(GameLevel.EASY)).willReturn("123");
+
+String num = genMock.generate(GameLevel.NORMAL);
+```
+
+- 이 코드는 스텁을 설정할 때 generate() 메서드의 인자로 GameLevel.EASY를 전달하고 있는데, 실제로 generate() 메서드를 호출할 때는 GameLevel.NORMAL을 인자로 전달했다. 이 경우 genMock.generate(GameLevel.NORMAL) 코드는 스텁을 설정할 때 사용한 인자와 일치하지 않으므로 "123"이 아닌 null을 리턴한다.
+
+|Mockito는 일치하는 스텁 설정이 없을 경우 리턴 타입의 기본 값을 리턴한다. 예를 들어 리턴 타입이 int면 0을 리턴하고 boolean이면 false를 리턴한다. 기본 데이터 타입이 아닌 String이나 List와 같은 참조 타입이면 null을 리턴한다.
+
+- org.mockito.ArgumentMatchers 클래스를 사용하면 정확하게 일치하는 값 대신 임의의 값에 일치하도록 설정할 수 있다. 
+
+```java
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.mock;
+
+public class AnyMatcherTest {
+    @Test
+    void anyMatchTest() {
+        GameNumGen genMock = mock(GameNumGen.class);
+        given(genMock.generate(any())).willReturn("456");
+
+        String num = genMock.generate(GameLevel.EASY);
+        assertEquals("456", num);
+
+        String num2 = genMock.generate(GameLevel.NORMAL);
+        assertEquals("456", num2);
+    }
+}
+```
+- 스텁을 설정할 때 ArgumentMatchers.any() 메서드를 인자 위치에 전달했다. 이 메서드를 사용하면 모든 값에 일치하도록 스텁을 설정한다. 따라서 generate() 메서드는 모두 "456"을 리턴한다.
+
+- Mockito 클래스와 BDDMockito 클래스는 ArgumentMatchers 클래스를 상속하고 있으므로 ArgumentMatchers.any() 대신에 Mockito.any()나 BDDMockito.any()를 사용해도 된다.
+
+- ArgumentMatchers 클래스는 any() 외에도 다음의 메서드를 제공한다.
