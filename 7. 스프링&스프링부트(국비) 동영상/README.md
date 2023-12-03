@@ -24,3 +24,4 @@
 - [20231123](https://drive.google.com/open?id=1_rSaV2mrAW7oNj72dT7TOzXrahNmA6lq&usp=drive_copy)
 - [20231124](https://drive.google.com/open?id=1uCr1tYpL90XUc1Fljg41w9p-RfBZIb5N&usp=drive_copy)
 - [20231127](https://drive.google.com/open?id=1gxZ8bBPKFkfmIdGOt0omlABe2P3rMNmR&usp=drive_copy)
+- [20231202](https://drive.google.com/drive/folders/1v2CsS8KB4JEW8_9Jmh0VU5aKWWebD9wz?usp=drive_link)
