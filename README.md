@@ -19,4 +19,4 @@
 - [서블릿 & JSP(국비) 동영상](https://github.com/yonggyo1125/lectureETC/tree/master/6.%20%EC%84%9C%EB%B8%94%EB%A6%BF%20%26%20JSP(%EA%B5%AD%EB%B9%84)%20%EB%8F%99%EC%98%81%EC%83%81)
 - [스프링&스프링부트(국비) 동영상](https://github.com/yonggyo1125/lectureETC/tree/master/7.%20%EC%8A%A4%ED%94%84%EB%A7%81%26%EC%8A%A4%ED%94%84%EB%A7%81%EB%B6%80%ED%8A%B8(%EA%B5%AD%EB%B9%84)%20%EB%8F%99%EC%98%81%EC%83%81)
 - [리액트](https://github.com/yonggyo1125/reactLecture)
-- [데이터베이스 - 오라클(국비) 동영상]()
+- [데이터베이스 - 오라클(국비) 동영상](https://github.com/yonggyo1125/lectureETC/tree/master/8.%20%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%B2%A0%EC%9D%B4%EC%8A%A4%20-%20%EC%98%A4%EB%9D%BC%ED%81%B4(%EA%B5%AD%EB%B9%84)%20%EB%8F%99%EC%98%81%EC%83%81)
