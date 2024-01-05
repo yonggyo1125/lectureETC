@@ -12,7 +12,7 @@
 - <a href="https://drive.google.com/drive/folders/1VDVQj2ktKJA-LevYKl9OhV76DRoAjBFa?usp=drive_link">웹기초</a>
 - <a href="https://github.com/yonggyo1125/jwt_with_security">Spring Security + JWT로 인증 인가 구현하기</a>
 - <a href="https://github.com/yonggyo1125/lecture_cicd">젠킨스, AWS 활용 CI/CD 구축</a>
-
+- <a href="https://github.com/yonggyo1125/lecture_portfolio">포트폴리오 기능구현 강의</a>
 ## 국비 수업 동영상
 
 - [자바(국비) 동영상](https://github.com/yonggyo1125/lectureETC/tree/master/4.%20%EC%9E%90%EB%B0%94(%EA%B5%AD%EB%B9%84)%20%EB%8F%99%EC%98%81%EC%83%81)
