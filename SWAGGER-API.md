@@ -148,4 +148,5 @@ public class MemberController {
 ## 적용결과
 
 
+![1](https://github.com/user-attachments/assets/b0b15ce7-60f8-4ec3-b4ae-c5b6b24259de)
 
